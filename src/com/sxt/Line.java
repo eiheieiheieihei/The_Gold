@@ -13,7 +13,7 @@ public class Line {
     int x = 375, y = 160;
     //线终点坐标
     int endx = 500, endy = 500;
-    //线长 角度 方向 状态（摇摆0 抓取1 收回2）
+    //线长 角度 方向 状态（摇摆0 抓取1 收回2 抓取返回3）
     double length = 100;
     double n = 0;
     int toward = 1;
@@ -38,6 +38,18 @@ public class Line {
                 } else {
                     state = 0;
                 }
+                break;
+            case 3:
+                if (length > 100) {
+                    state_2(g);
+                    this.frame.gold.x=endx-26;
+                    this.frame.gold.y=endy;
+                } else {
+                    this.frame.gold.x=-150;
+                    this.frame.gold.y=-150;
+                    state = 0;
+                }
+                break;
             default:
                 break;
         }
@@ -73,7 +85,7 @@ public class Line {
     void logic() {
         if (endx > this.frame.gold.x && endx < this.frame.gold.x + this.frame.gold.width &&
                 endy > this.frame.gold.y && endy < this.frame.gold.y + this.frame.gold.height) {
-            System.out.println('1');
+            state=3;
         }
 
     }
