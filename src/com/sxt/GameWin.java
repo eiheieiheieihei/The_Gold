@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 //继承JFrame类：创建窗口，监听鼠标键盘事件的功能
 public class GameWin extends JFrame {
     Bg bg=new Bg();
-    Line line=new Line();
+    Line line=new Line(this);
     Gold gold=new Gold();
 
     //画布
