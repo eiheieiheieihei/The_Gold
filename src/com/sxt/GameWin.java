@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 public class GameWin extends JFrame {
     Bg bg=new Bg();
     Line line=new Line();
+    Gold gold=new Gold();
     //窗口设置
     void launch(){
         this.setVisible(true);
@@ -43,6 +44,7 @@ public class GameWin extends JFrame {
     public void paint(Graphics img){
         bg.paintSelf(img);
         line.paintSelf(img);
+        gold.paintSelf(img);
     }
     public static void main(String[] args){
         GameWin gameWin=new GameWin();
