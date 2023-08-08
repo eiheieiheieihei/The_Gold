@@ -10,6 +10,10 @@ public class GameWin extends JFrame {
     Bg bg=new Bg();
     Line line=new Line();
     Gold gold=new Gold();
+
+    //画布
+    Image offScreenImage;
+
     //窗口设置
     void launch(){
         this.setVisible(true);
@@ -42,9 +46,15 @@ public class GameWin extends JFrame {
 
     //绘制图片bg
     public void paint(Graphics img){
-        bg.paintSelf(img);
-        line.paintSelf(img);
-        gold.paintSelf(img);
+        //画布大小和画笔设定
+        offScreenImage=this.createImage(768,1000);
+        Graphics gImage=offScreenImage.getGraphics();
+        //画于画布上
+        bg.paintSelf(gImage);
+        line.paintSelf(gImage);
+        gold.paintSelf(gImage);
+        //画布画于窗口
+        img.drawImage(offScreenImage,0,0,null);
     }
     public static void main(String[] args){
         GameWin gameWin=new GameWin();
