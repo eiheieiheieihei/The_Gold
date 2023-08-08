@@ -18,8 +18,11 @@ public class GameWin extends JFrame {
     //类中不能直接写for循环，所以用代码块或者无参构造
     //代码块
     {
-        for(int i=0;i<3;i++){
-            objectList.add(new Gold());
+        for(int i=0;i<8;i++){
+            double randon=Math.random();
+            if(randon<0.3){objectList.add((new GoldMini()));}
+            else if(randon<0.7){objectList.add(new Gold());}
+            else {objectList.add(new GoldPlus());}
         }
         for(int i=0;i<3;i++){
             objectList.add(new Rock());
