@@ -43,12 +43,15 @@ public class Line {
                 if (length > 100) {
                     state_2(g);
                     for (Object obj : this.frame.objectList) {
-                        obj.x = endx - 26;
-                        obj.y = endy;
-                        if (length <= 100) {
-                            obj.x = -150;
-                            obj.y = -150;
-                            state = 0;
+                        if (obj.flag) {
+                            obj.x = endx - 26;
+                            obj.y = endy;
+                            if (length <= 100) {
+                                obj.x = -150;
+                                obj.y = -150;
+                                obj.flag=false;
+                                state = 0;
+                            }
                         }
                     }
                 }
@@ -86,10 +89,11 @@ public class Line {
 
     //判断endx,endy是否在矩形区域中
     void logic() {
-        for(Object obj:this.frame.objectList){
+        for (Object obj : this.frame.objectList) {
             if (endx > obj.x && endx < obj.x + obj.width &&
                     endy > obj.y && endy < obj.y + obj.height) {
-                state=3;
+                state = 3;
+                obj.flag = true;
             }
         }
     }
