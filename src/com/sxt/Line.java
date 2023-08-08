@@ -26,7 +26,7 @@ public class Line {
                 state_0(g);
                 break;
             case 1:
-                if (length < 500) {
+                if (length < 650) {
                     state_1(g);
                 } else {
                     state = 2;
@@ -42,12 +42,15 @@ public class Line {
             case 3:
                 if (length > 100) {
                     state_2(g);
-                    this.frame.gold.x=endx-26;
-                    this.frame.gold.y=endy;
-                } else {
-                    this.frame.gold.x=-150;
-                    this.frame.gold.y=-150;
-                    state = 0;
+                    for (Object obj : this.frame.objectList) {
+                        obj.x = endx - 26;
+                        obj.y = endy;
+                        if (length <= 100) {
+                            obj.x = -150;
+                            obj.y = -150;
+                            state = 0;
+                        }
+                    }
                 }
                 break;
             default:
@@ -83,10 +86,11 @@ public class Line {
 
     //判断endx,endy是否在矩形区域中
     void logic() {
-        if (endx > this.frame.gold.x && endx < this.frame.gold.x + this.frame.gold.width &&
-                endy > this.frame.gold.y && endy < this.frame.gold.y + this.frame.gold.height) {
-            state=3;
+        for(Object obj:this.frame.objectList){
+            if (endx > obj.x && endx < obj.x + obj.width &&
+                    endy > obj.y && endy < obj.y + obj.height) {
+                state=3;
+            }
         }
-
     }
 }

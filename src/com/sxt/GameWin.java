@@ -4,12 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 //继承JFrame类：创建窗口，监听鼠标键盘事件的功能
 public class GameWin extends JFrame {
+
+    //存储金块、石块
+    List<Object> objectList=new ArrayList<>();
     Bg bg=new Bg();
     Line line=new Line(this);
-    Gold gold=new Gold();
+
+    //类中不能直接写for循环，所以用代码块或者无参构造
+    //代码块
+    {
+        for(int i=0;i<3;i++){
+            objectList.add(new Gold());
+        }
+    }
 
     //画布
     Image offScreenImage;
@@ -52,7 +64,9 @@ public class GameWin extends JFrame {
         //画于画布上
         bg.paintSelf(gImage);
         line.paintSelf(gImage);
-        gold.paintSelf(gImage);
+        for(Object obj:objectList){
+            obj.paintSelf(gImage);
+        }
         //画布画于窗口
         img.drawImage(offScreenImage,0,0,null);
     }
