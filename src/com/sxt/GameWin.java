@@ -21,6 +21,9 @@ public class GameWin extends JFrame {
         for(int i=0;i<3;i++){
             objectList.add(new Gold());
         }
+        for(int i=0;i<3;i++){
+            objectList.add(new Rock());
+        }
     }
 
     //画布

@@ -13,7 +13,7 @@ public class Line {
     int x = 375, y = 160;
     //线终点坐标
     int endx = 500, endy = 500;
-    //线长 角度 方向 状态（摇摆0 抓取1 收回2 抓取返回3）
+    //线长 角度 方向 状态（摇摆0 抓取1 收回2 抓取返回3）as
     double length = 100;
     double n = 0;
     int toward = 1;
@@ -40,11 +40,13 @@ public class Line {
                 }
                 break;
             case 3:
+                int m=1;
                 if (length > 100) {
                     state_2(g);
                     for (Object obj : this.frame.objectList) {
                         if (obj.flag) {
-                            obj.x = endx - 26;
+                            m=obj.m;
+                            obj.x = endx - obj.getWidth()/2;
                             obj.y = endy;
                             if (length <= 100) {
                                 obj.x = -150;
@@ -54,6 +56,11 @@ public class Line {
                             }
                         }
                     }
+                }
+                try {
+                    Thread.sleep(m);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
                 break;
             default:
@@ -70,12 +77,12 @@ public class Line {
     }
 
     void state_1(Graphics g) {
-        length = length + 20;
+        length = length + 15;
         drawing(g);
     }
 
     void state_2(Graphics g) {
-        length = length - 20;
+        length = length - 15;
         drawing(g);
     }
 

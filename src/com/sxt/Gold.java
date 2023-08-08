@@ -11,6 +11,7 @@ public class Gold extends Object{
         this.width=52;
         this.height=52;
         this.flag=false;
+        this.m=150;
         this.img= Toolkit.getDefaultToolkit().getImage("imgs/gold1.gif");
     }
 }

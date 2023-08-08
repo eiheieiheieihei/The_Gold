@@ -8,8 +8,14 @@ public class Object {
     int width,height;
     Image img;
     boolean flag=false;
+    //质量属性
+    int m;
 
     void paintSelf(Graphics g){
         g.drawImage(img,x,y,null);
+    }
+
+    public int getWidth() {
+        return width;
     }
 }
