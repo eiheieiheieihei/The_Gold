@@ -11,6 +11,10 @@ public class Bg {
     //药水数量 药水状态，true为正在使用
     static int waterNum=3;
     static boolean waterState=false;
+    //计时，开始 结束 每局时间
+    long satrtTime;
+    long endTime;
+    int gameTime=20;
     //图片载入
     Image bg=Toolkit.getDefaultToolkit().getImage("imgs/bg.jpg");
     Image bg1=Toolkit.getDefaultToolkit().getImage("imgs/bg1.jpg");
@@ -32,6 +36,9 @@ public class Bg {
                 drawWord(img,30,Color.BLACK,"积分："+count,30,150);
                 drawWord(img,20,Color.BLACK,"关卡："+Bg.level,30,60);
                 drawWord(img,30,Color.BLACK,"目标积分："+goal,30,110);
+                endTime=System.currentTimeMillis();
+                long time=gameTime-(endTime-satrtTime)/1000;
+                drawWord(img,30,Color.BLACK,"时间: "+(time>0?time:0),520,150);
                 break;
             case GAME_SHOPPING:
                 break;

@@ -89,7 +89,10 @@ public class GameWin extends JFrame {
                 super.mouseClicked(e);
                 switch (gameState){
                     case GAME_START:
-                        if(e.getButton()==3)gameState=GameState.GAME_ING;
+                        if(e.getButton()==3) {
+                            gameState = GameState.GAME_ING;
+                            bg.satrtTime=System.currentTimeMillis();
+                        }
                         break;
                     case GAME_ING:
                         //左右摇摆，点击左键
@@ -148,14 +151,22 @@ public class GameWin extends JFrame {
         gameWin.launch();
     }
 
+    //判断是否在规定时间内完成通关
+    boolean gameTimeOn(){
+        long time=(bg.endTime-bg.satrtTime)/1000;
+        if(time> bg.gameTime)return true;
+        return false;
+    }
     //下一关
     public void nextLevel(){
-        if(gameState==GameState.GAME_ING){
+        if(gameState==GameState.GAME_ING&&gameTimeOn()){
             if(Bg.count>=bg.goal){
                 Bg.level++;
                 dispose();
                 GameWin gameWinNext=new GameWin();
                 gameWinNext.launch();
+            }else{
+                gameState=GameState.GAME_FAIL;
             }
         }
     }
