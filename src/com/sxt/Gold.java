@@ -2,6 +2,7 @@ package com.sxt;
 
 import java.awt.*;
 
+
 public class Gold extends Object{
 
     Gold(){
@@ -13,6 +14,7 @@ public class Gold extends Object{
         this.flag=false;
         this.m=150;
         this.count=4;
+        this.type=Type.GOLD;
         this.img= Toolkit.getDefaultToolkit().getImage("imgs/gold1.gif");
     }
 }

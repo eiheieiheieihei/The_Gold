@@ -8,10 +8,14 @@ public class Object {
     int width,height;
     Image img;
     boolean flag=false;
-    //质量属性 积分
+    //质量属性 积分 类型
     int m;
     int count;
-
+    Type type;
+    public enum Type{
+        ROCK,
+        GOLD
+    }
     void paintSelf(Graphics g){
         g.drawImage(img,x,y,null);
     }

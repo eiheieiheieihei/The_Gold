@@ -30,21 +30,21 @@ public class Line {
             case 0:
                 state_0(g);
                 break;
-            case 1:
+            case 1://抓取
                 if (length < MAX_LENTH) {
                     state_1(g);
                 } else {
                     state = 2;
                 }
                 break;
-            case 2:
+            case 2://返回
                 if (length > MIN_LENTH) {
                     state_2(g);
                 } else {
                     state = 0;
                 }
                 break;
-            case 3:
+            case 3://抓取返回
                 int m=1;
                 if (length > 100) {
                     state_2(g);
@@ -54,12 +54,22 @@ public class Line {
                             obj.x = endx - obj.getWidth()/2;
                             obj.y = endy;
                             if (length <= 100) {
+                                //抓取完成后的操作
                                 obj.x = -150;
                                 obj.y = -150;
                                 obj.flag=false;
                                 //积分累计
                                 Bg.count+=obj.count;
                                 state = 0;
+                            }
+                            if(Bg.waterState){
+                                if(obj.type== Object.Type.GOLD){m=1;}
+                                if(obj.type== Object.Type.ROCK){obj.x = -150;
+                                    obj.y = -150;
+                                    obj.flag=false;
+                                    Bg.waterState=false;
+                                    state=2;
+                                }
                             }
                         }
                     }

@@ -75,11 +75,17 @@ public class GameWin extends JFrame {
 
         //鼠标事件
         addMouseListener(new MouseAdapter() {
-            //点击事件 左键1 滚轮2 右键3
+            //点击事件 左键1 滚轮2 右键3z
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(e.getButton()==1)line.state=1;
+                //左右摇摆，点击左键
+                if(e.getButton()==1&&line.state==0)line.state=1;
+                //抓取返回，点击右键
+                if(e.getButton()==3&&line.state==3){
+                    Bg.waterState=true;
+                    Bg.waterNum--;
+                }
             }
         });
         //不停的绘制
