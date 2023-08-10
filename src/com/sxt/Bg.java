@@ -20,12 +20,28 @@ public class Bg {
     public void paintSelf(Graphics img){
         img.drawImage(bg,0,0,null);
         img.drawImage(bg1,0,0,null);
-        img.drawImage(peo,300,50,null);
-        img.drawImage(water,500,40,null);
-        drawWord(img,30,Color.BLACK,"*"+waterNum,560,70);
-        drawWord(img,30,Color.BLACK,"积分："+count,30,150);
-        drawWord(img,20,Color.BLACK,"关卡："+Bg.level,30,60);
-        drawWord(img,30,Color.BLACK,"目标积分："+goal,30,110);
+        switch (GameWin.gameState){
+            case GAME_START:
+                drawWord(img,50,Color.BLACK,"按下左键开始！",100,400);
+                drawWord(img,50,Color.BLACK,"一次没进就再试试再试试！！！",35,600);
+                break;
+            case GAME_ING:
+                img.drawImage(peo,300,50,null);
+                img.drawImage(water,500,40,null);
+                drawWord(img,30,Color.BLACK,"*"+waterNum,560,70);
+                drawWord(img,30,Color.BLACK,"积分："+count,30,150);
+                drawWord(img,20,Color.BLACK,"关卡："+Bg.level,30,60);
+                drawWord(img,30,Color.BLACK,"目标积分："+goal,30,110);
+                break;
+            case GAME_SHOPPING:
+                break;
+            case GAME_WIN:
+                break;
+            case GAME_FAIL:
+                break;
+            default:
+        }
+
     }
 
     //字符串绘制

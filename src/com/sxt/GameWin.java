@@ -9,7 +9,15 @@ import java.util.List;
 
 //继承JFrame类：创建窗口，监听鼠标键盘事件的功能
 public class GameWin extends JFrame {
-
+    //游戏状态
+    static GameState gameState=GameState.GAME_START;
+    public enum GameState{
+        GAME_START,
+        GAME_ING,
+        GAME_SHOPPING,
+        GAME_WIN,
+        GAME_FAIL
+    }
     //存储金块、石块
     List<Object> objectList=new ArrayList<>();
     Bg bg=new Bg();
@@ -79,15 +87,30 @@ public class GameWin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //左右摇摆，点击左键
-                if(e.getButton()==1&&line.state==0)line.state=1;
-                //抓取返回，点击右键
-                if(e.getButton()==3&&line.state==3){
-                    Bg.waterState=true;
-                    Bg.waterNum--;
+                switch (gameState){
+                    case GAME_START:
+                        if(e.getButton()==3)gameState=GameState.GAME_ING;
+                        break;
+                    case GAME_ING:
+                        //左右摇摆，点击左键
+                        if(e.getButton()==1&&line.state==0)line.state=1;
+                        //抓取返回，点击右键
+                        if(e.getButton()==3&&line.state==3){
+                            Bg.waterState=true;
+                            Bg.waterNum--;
+                        }
+                        break;
+                    case GAME_SHOPPING:
+                        break;
+                    case GAME_WIN:
+                        break;
+                    case GAME_FAIL:
+                        break;
+                    default:
                 }
             }
         });
+
         //不停的绘制
         while (true){
             repaint();
@@ -109,10 +132,12 @@ public class GameWin extends JFrame {
         Graphics gImage=offScreenImage.getGraphics();
         //画于画布上
         bg.paintSelf(gImage);
-        for(Object obj:objectList){
-            obj.paintSelf(gImage);
+        if(gameState==GameState.GAME_ING){
+            for(Object obj:objectList){
+                obj.paintSelf(gImage);
+            }
+            line.paintSelf(gImage);
         }
-        line.paintSelf(gImage);
         //画布画于窗口
         img.drawImage(offScreenImage,0,0,null);
         img.drawImage(offScreenImage,0,0,null);
@@ -125,11 +150,13 @@ public class GameWin extends JFrame {
 
     //下一关
     public void nextLevel(){
-        if(Bg.count>=bg.goal){
-            Bg.level++;
-            dispose();
-            GameWin gameWinNext=new GameWin();
-            gameWinNext.launch();
+        if(gameState==GameState.GAME_ING){
+            if(Bg.count>=bg.goal){
+                Bg.level++;
+                dispose();
+                GameWin gameWinNext=new GameWin();
+                gameWinNext.launch();
+            }
         }
     }
 }

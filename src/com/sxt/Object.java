@@ -16,6 +16,7 @@ public class Object {
         ROCK,
         GOLD
     }
+
     void paintSelf(Graphics g){
         g.drawImage(img,x,y,null);
     }

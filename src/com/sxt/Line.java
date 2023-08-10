@@ -77,6 +77,7 @@ public class Line {
                 try {
                     Thread.sleep(m);
                 } catch (InterruptedException e) {
+//                    e.printStackTrace();
                     throw new RuntimeException(e);
                 }
                 break;
