@@ -8,8 +8,9 @@ public class Object {
     int width,height;
     Image img;
     boolean flag=false;
-    //质量属性
+    //质量属性 积分
     int m;
+    int count;
 
     void paintSelf(Graphics g){
         g.drawImage(img,x,y,null);

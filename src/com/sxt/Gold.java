@@ -12,6 +12,7 @@ public class Gold extends Object{
         this.height=52;
         this.flag=false;
         this.m=150;
+        this.count=4;
         this.img= Toolkit.getDefaultToolkit().getImage("imgs/gold1.gif");
     }
 }
@@ -21,6 +22,7 @@ class GoldMini extends Gold{
         this.width=36;
         this.height=36;
         this.m=15;
+        this.count=2;
         this.img= Toolkit.getDefaultToolkit().getImage("imgs/gold0.gif");
     }
 }
@@ -31,6 +33,7 @@ class GoldPlus extends Gold{
         this.width=105;
         this.height=105;
         this.m=15;
+        this.count=8;
         this.img= Toolkit.getDefaultToolkit().getImage("imgs/gold2.gif");
     }
 }

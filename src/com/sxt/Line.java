@@ -15,9 +15,14 @@ public class Line {
     int endx = 500, endy = 500;
     //线长 角度 方向 状态（摇摆0 抓取1 收回2 抓取返回3）as
     double length = 100;
+    double MAX_LENTH=700;
+    double MIN_LENTH=100;
+
     double n = 0;
     int toward = 1;
     int state;
+    //钩爪图片
+    Image hook=Toolkit.getDefaultToolkit().getImage("imgs/hook.png");
 
     void paintSelf(Graphics g) {
         logic();
@@ -26,14 +31,14 @@ public class Line {
                 state_0(g);
                 break;
             case 1:
-                if (length < 650) {
+                if (length < MAX_LENTH) {
                     state_1(g);
                 } else {
                     state = 2;
                 }
                 break;
             case 2:
-                if (length > 100) {
+                if (length > MIN_LENTH) {
                     state_2(g);
                 } else {
                     state = 0;
@@ -52,6 +57,8 @@ public class Line {
                                 obj.x = -150;
                                 obj.y = -150;
                                 obj.flag=false;
+                                //积分累计
+                                Bg.count+=obj.count;
                                 state = 0;
                             }
                         }
@@ -90,11 +97,16 @@ public class Line {
     void drawing(Graphics g) {
         endx = (int) (x + length * Math.cos(n * Math.PI));
         endy = (int) (y + length * Math.sin(n * Math.PI));
-        g.setColor(Color.red);
+        g.setColor(Color.ORANGE);
         g.drawLine(x, y, endx, endy);
+        g.setColor(Color.RED);
+        g.drawLine(x-1, y-1, endx, endy);
+        g.setColor(Color.YELLOW);
+        g.drawLine(x+1, y+1, endx, endy);
+        g.drawImage(hook,endx-36,endy-2,null);
     }
 
-    //判断endx,endy是否在矩形区域中
+    //判断endx,endy是否在矩形区域中,碰撞检测，检测是否被抓取
     void logic() {
         for (Object obj : this.frame.objectList) {
             if (endx > obj.x && endx < obj.x + obj.width &&

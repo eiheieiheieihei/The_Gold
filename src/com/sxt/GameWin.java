@@ -38,6 +38,7 @@ public class GameWin extends JFrame {
             if(isPlace){
                 objectList.add(gold);
             }else {
+                //释放状态，重新生成
                 isPlace=true;i--;
             }
         }
@@ -101,10 +102,10 @@ public class GameWin extends JFrame {
         Graphics gImage=offScreenImage.getGraphics();
         //画于画布上
         bg.paintSelf(gImage);
-        line.paintSelf(gImage);
         for(Object obj:objectList){
             obj.paintSelf(gImage);
         }
+        line.paintSelf(gImage);
         //画布画于窗口
         img.drawImage(offScreenImage,0,0,null);
     }
