@@ -107,8 +107,12 @@ public class GameWin extends JFrame {
                     case GAME_SHOPPING:
                         break;
                     case GAME_WIN:
-                        break;
                     case GAME_FAIL:
+                        if(e.getButton()==3) {
+                            gameState = GameState.GAME_START;
+                            bg.reGame();
+                            line.reGame();
+                        }
                         break;
                     default:
                 }
@@ -166,13 +170,13 @@ public class GameWin extends JFrame {
                     gameState=GameState.GAME_WIN;
                 }else{
                     Bg.level++;
-                    dispose();
-                    GameWin gameWinNext=new GameWin();
-                    gameWinNext.launch();
                 }
             }else{
                 gameState=GameState.GAME_FAIL;
             }
+            dispose();
+            GameWin gameWinNext=new GameWin();
+            gameWinNext.launch();
         }
     }
 }

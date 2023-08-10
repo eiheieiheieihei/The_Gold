@@ -15,14 +15,14 @@ public class Line {
     int endx = 500, endy = 500;
     //线长 角度 方向 状态（摇摆0 抓取1 收回2 抓取返回3）as
     double length = 100;
-    double MAX_LENTH=700;
-    double MIN_LENTH=100;
+    double MAX_LENTH = 700;
+    double MIN_LENTH = 100;
 
     double n = 0;
     int toward = 1;
     int state;
     //钩爪图片
-    Image hook=Toolkit.getDefaultToolkit().getImage("imgs/hook.png");
+    Image hook = Toolkit.getDefaultToolkit().getImage("imgs/hook.png");
 
     void paintSelf(Graphics g) {
         logic();
@@ -45,30 +45,33 @@ public class Line {
                 }
                 break;
             case 3://抓取返回
-                int m=1;
+                int m = 1;
                 if (length > 100) {
                     state_2(g);
                     for (Object obj : this.frame.objectList) {
                         if (obj.flag) {
-                            m=obj.m;
-                            obj.x = endx - obj.getWidth()/2;
+                            m = obj.m;
+                            obj.x = endx - obj.getWidth() / 2;
                             obj.y = endy;
                             if (length <= 100) {
                                 //抓取完成后的操作
                                 obj.x = -150;
                                 obj.y = -150;
-                                obj.flag=false;
+                                obj.flag = false;
                                 //积分累计
-                                Bg.count+=obj.count;
+                                Bg.count += obj.count;
                                 state = 0;
                             }
-                            if(Bg.waterState){
-                                if(obj.type== Object.Type.GOLD){m=1;}
-                                if(obj.type== Object.Type.ROCK){obj.x = -150;
+                            if (Bg.waterState) {
+                                if (obj.type == Object.Type.GOLD) {
+                                    m = 1;
+                                }
+                                if (obj.type == Object.Type.ROCK) {
+                                    obj.x = -150;
                                     obj.y = -150;
-                                    obj.flag=false;
-                                    Bg.waterState=false;
-                                    state=2;
+                                    obj.flag = false;
+                                    Bg.waterState = false;
+                                    state = 2;
                                 }
                             }
                         }
@@ -111,10 +114,10 @@ public class Line {
         g.setColor(Color.ORANGE);
         g.drawLine(x, y, endx, endy);
         g.setColor(Color.RED);
-        g.drawLine(x-1, y-1, endx, endy);
+        g.drawLine(x - 1, y - 1, endx, endy);
         g.setColor(Color.YELLOW);
-        g.drawLine(x+1, y+1, endx, endy);
-        g.drawImage(hook,endx-36,endy-2,null);
+        g.drawLine(x + 1, y + 1, endx, endy);
+        g.drawImage(hook, endx - 36, endy - 2, null);
     }
 
     //判断endx,endy是否在矩形区域中,碰撞检测，检测是否被抓取
@@ -126,5 +129,12 @@ public class Line {
                 obj.flag = true;
             }
         }
+    }
+
+    //元素重置
+    void reGame() {
+        n = 0;
+        toward = 1;
+        length = 100;
     }
 }
