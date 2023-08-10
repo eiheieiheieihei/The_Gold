@@ -18,14 +18,46 @@ public class GameWin extends JFrame {
     //类中不能直接写for循环，所以用代码块或者无参构造
     //代码块
     {
+        //是否可以放置
+        boolean isPlace=true;
         for(int i=0;i<8;i++){
             double randon=Math.random();
-            if(randon<0.3){objectList.add((new GoldMini()));}
-            else if(randon<0.7){objectList.add(new Gold());}
-            else {objectList.add(new GoldPlus());}
+            Gold gold;
+            if(randon<0.3){gold=((new GoldMini()));}
+            else if(randon<0.7){gold=(new Gold());}
+            else {gold=(new GoldPlus());}
+
+            //判断是否重叠
+            for(Object obj:objectList){
+                if(gold.getRec().intersects(obj.getRec())){
+                    //不能放置
+                    isPlace=false;
+                }
+            }
+
+            if(isPlace){
+                objectList.add(gold);
+            }else {
+                isPlace=true;i--;
+            }
         }
-        for(int i=0;i<3;i++){
-            objectList.add(new Rock());
+        for(int i=0;i<6;i++){
+            double randon=Math.random();
+            Rock rock;
+            rock=new Rock();
+            //判断是否重叠
+            for(Object obj:objectList){
+                if(rock.getRec().intersects(obj.getRec())){
+                    //不能放置
+                    isPlace=false;
+                }
+            }
+
+            if(isPlace){
+                objectList.add(rock);
+            }else {
+                isPlace=true;i--;
+            }
         }
     }
 
