@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 //继承JFrame类：创建窗口，监听鼠标键盘事件的功能
 public class GameWin extends JFrame {
@@ -161,10 +162,14 @@ public class GameWin extends JFrame {
     public void nextLevel(){
         if(gameState==GameState.GAME_ING&&gameTimeOn()){
             if(Bg.count>=bg.goal){
-                Bg.level++;
-                dispose();
-                GameWin gameWinNext=new GameWin();
-                gameWinNext.launch();
+                if(Bg.level==bg.levelSum){
+                    gameState=GameState.GAME_WIN;
+                }else{
+                    Bg.level++;
+                    dispose();
+                    GameWin gameWinNext=new GameWin();
+                    gameWinNext.launch();
+                }
             }else{
                 gameState=GameState.GAME_FAIL;
             }

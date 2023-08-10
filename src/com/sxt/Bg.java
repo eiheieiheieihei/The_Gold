@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class Bg {
     //关卡数 目标得分
+    int levelSum=5;
     static int level=1;
     int goal=level*5;
     //积分总分
@@ -43,12 +44,17 @@ public class Bg {
             case GAME_SHOPPING:
                 break;
             case GAME_WIN:
+                drawWord(img,60,Color.red,"很牛喔！",100,400);
+                drawWord(img,60,Color.red,"达到墙壁啦！",100,550);
+                drawWord(img,60,Color.red,"总分："+count,100,630);
                 break;
             case GAME_FAIL:
+                drawWord(img,60,Color.BLACK,"很不错哟！",100,400);
+                drawWord(img,60,Color.BLACK,"这就失败了！",100,550);
+                drawWord(img,60,Color.BLACK,"总分："+count,100,630);
                 break;
             default:
         }
-
     }
 
     //字符串绘制
