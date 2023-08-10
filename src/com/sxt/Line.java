@@ -113,9 +113,7 @@ public class Line {
         endy = (int) (y + length * Math.sin(n * Math.PI));
         g.setColor(Color.ORANGE);
         g.drawLine(x, y, endx, endy);
-        g.setColor(Color.RED);
         g.drawLine(x - 1, y - 1, endx, endy);
-        g.setColor(Color.YELLOW);
         g.drawLine(x + 1, y + 1, endx, endy);
         g.drawImage(hook, endx - 36, endy - 2, null);
     }

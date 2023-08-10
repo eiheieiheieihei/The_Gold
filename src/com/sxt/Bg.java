@@ -16,6 +16,9 @@ public class Bg {
     long satrtTime;
     long endTime;
     int gameTime = 20;
+    //药水价格 是否进入商店
+    int waterPrice = (int) (Math.random() * 10);
+    boolean shopWater = false;
     //图片载入
     Image bg = Toolkit.getDefaultToolkit().getImage("imgs/bg.jpg");
     Image bg1 = Toolkit.getDefaultToolkit().getImage("imgs/bg1.jpg");
@@ -28,7 +31,7 @@ public class Bg {
         img.drawImage(bg1, 0, 0, null);
         switch (GameWin.gameState) {
             case GAME_START:
-                drawWord(img, 50, Color.BLACK, "按下左键开始！", 100, 400);
+                drawWord(img, 50, Color.BLACK, "按下右键开始！", 100, 400);
                 drawWord(img, 50, Color.BLACK, "一次没进就再试试再试试！！！", 35, 600);
                 break;
             case GAME_ING:
@@ -43,10 +46,20 @@ public class Bg {
                 drawWord(img, 30, Color.BLACK, "时间: " + (time > 0 ? time : 0), 520, 150);
                 break;
             case GAME_SHOPPING:
+                img.drawImage(water, 300, 350, null);
+                drawWord(img, 30, Color.red, "药水价格：" + waterPrice, 300, 500);
+                drawWord(img, 30, Color.red, "是否购买？", 300, 550);
+                drawWord(img, 30, Color.red, "是（左键） 否（右键）", 300, 650);
+                if (shopWater) {
+                    count = count - waterPrice;
+                    waterNum++;
+                    shopWater = false;
+                    GameWin.gameState = GameWin.GameState.GAME_START;
+                }
                 break;
             case GAME_WIN:
-                drawWord(img, 60, Color.red, "很牛喔！", 100, 400);
-                drawWord(img, 60, Color.red, "达到墙壁啦！", 100, 550);
+                drawWord(img, 60, Color.red, "wk！好厉害！", 100, 400);
+                drawWord(img, 60, Color.red, "你赢啦！", 100, 550);
                 drawWord(img, 60, Color.red, "总分：" + count, 100, 630);
                 break;
             case GAME_FAIL:

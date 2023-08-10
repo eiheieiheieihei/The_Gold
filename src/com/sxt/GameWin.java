@@ -99,12 +99,18 @@ public class GameWin extends JFrame {
                         //左右摇摆，点击左键
                         if(e.getButton()==1&&line.state==0)line.state=1;
                         //抓取返回，点击右键
-                        if(e.getButton()==3&&line.state==3){
+                        if(e.getButton()==3&&line.state==3&&Bg.waterNum>0){
                             Bg.waterState=true;
                             Bg.waterNum--;
                         }
                         break;
                     case GAME_SHOPPING:
+                        if(e.getButton()==1){
+                            bg.shopWater=true;
+                        }
+                        if(e.getButton()==3){
+                            gameState=GameState.GAME_START;
+                        }
                         break;
                     case GAME_WIN:
                     case GAME_FAIL:
@@ -141,13 +147,12 @@ public class GameWin extends JFrame {
         //画于画布上
         bg.paintSelf(gImage);
         if(gameState==GameState.GAME_ING){
+            line.paintSelf(gImage);
             for(Object obj:objectList){
                 obj.paintSelf(gImage);
             }
-            line.paintSelf(gImage);
         }
         //画布画于窗口
-        img.drawImage(offScreenImage,0,0,null);
         img.drawImage(offScreenImage,0,0,null);
     }
 
@@ -169,6 +174,7 @@ public class GameWin extends JFrame {
                 if(Bg.level==bg.levelSum){
                     gameState=GameState.GAME_WIN;
                 }else{
+                    gameState=GameState.GAME_SHOPPING;
                     Bg.level++;
                 }
             }else{
