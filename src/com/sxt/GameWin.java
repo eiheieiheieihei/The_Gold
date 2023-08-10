@@ -91,11 +91,12 @@ public class GameWin extends JFrame {
         //不停的绘制
         while (true){
             repaint();
-
+            nextLevel();
             //延时
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
+//                e.printStackTrace();
                 throw new RuntimeException(e);
             }
         }
@@ -114,9 +115,21 @@ public class GameWin extends JFrame {
         line.paintSelf(gImage);
         //画布画于窗口
         img.drawImage(offScreenImage,0,0,null);
+        img.drawImage(offScreenImage,0,0,null);
     }
+
     public static void main(String[] args){
         GameWin gameWin=new GameWin();
         gameWin.launch();
+    }
+
+    //下一关
+    public void nextLevel(){
+        if(Bg.count>=bg.goal){
+            Bg.level++;
+            dispose();
+            GameWin gameWinNext=new GameWin();
+            gameWinNext.launch();
+        }
     }
 }

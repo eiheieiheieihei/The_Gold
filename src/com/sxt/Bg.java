@@ -3,6 +3,9 @@ package com.sxt;
 import java.awt.*;
 
 public class Bg {
+    //关卡数 目标得分
+    static int level=1;
+    int goal=level*5;
     //积分总分
     static int count=0;
     //药水数量 药水状态，true为正在使用
@@ -21,6 +24,8 @@ public class Bg {
         img.drawImage(water,500,40,null);
         drawWord(img,30,Color.BLACK,"*"+waterNum,560,70);
         drawWord(img,30,Color.BLACK,"积分："+count,30,150);
+        drawWord(img,20,Color.BLACK,"关卡："+Bg.level,30,60);
+        drawWord(img,30,Color.BLACK,"目标积分："+goal,30,110);
     }
 
     //字符串绘制
