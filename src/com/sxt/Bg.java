@@ -32,7 +32,7 @@ public class Bg {
         switch (GameWin.gameState) {
             case GAME_START:
                 drawWord(img, 50, Color.BLACK, "按下右键开始！", 100, 400);
-                drawWord(img, 50, Color.BLACK, "一次没进就再试试再试试！！！", 35, 600);
+                drawWord(img, 50, Color.BLACK, "游戏快乐！！！", 35, 600);
                 break;
             case GAME_ING:
                 img.drawImage(peo, 300, 50, null);
@@ -63,8 +63,8 @@ public class Bg {
                 drawWord(img, 60, Color.red, "总分：" + count, 100, 630);
                 break;
             case GAME_FAIL:
-                drawWord(img, 60, Color.BLACK, "很不错哟！", 100, 400);
-                drawWord(img, 60, Color.BLACK, "这就失败了！", 100, 550);
+                drawWord(img, 60, Color.BLACK, "失败了", 100, 400);
+                drawWord(img, 60, Color.BLACK, "遗憾遗憾", 100, 550);
                 drawWord(img, 60, Color.BLACK, "总分：" + count, 100, 630);
                 break;
             default:
